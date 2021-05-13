@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="login.css"> -->
+</head>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: monospace;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    /* 背景颜色渐变 */
+    background-image: linear-gradient(120deg, #3498db, #8e44ad);
+}
+.form-Login1 {
+    /* width: 360px;
+    height: 580px;
+    background: #f1f1f1;
+    padding: 80px 40px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); */
+    width: 360px;
+    background-color:  #f1f1f1;
+    border-radius: 10px;
+    height: 580px;
+    padding: 80px 40px;
+    border-radius: 10px;
+}
+body {
+  width: 500px;
+  margin: 0 auto;
+}
+</style>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js">
+    $(function () {
+        $('#ajax_btn').click(function () {
+            //获取用户名和密码
+            username = $('#username').val()
+            password = $('#password').val()
+            //发起Ajax请求
+            $.ajax({
+                'url':'/user',
+                'data':{'username':username, 'password':password},
+                'datatype':'json',
+                'async':'true',
+            }).success(function (data) {
+                if (data === "succ"){
+                    //成功返回首页
+                    alert("登录成功")
+                   window.location.href('www.baidu.com')
+                }else{
+                    //失败打印出错误信息
+                    $('#errmsg').show().html('error! username or password is wrong!')
+                }
+            })
+        })
+    })
+</script>
+
+
+
+
+
+<body>
+    <div class="form-Login1">
+        <form action="#" class="form-Login">
+        <h1>Login</h1>
+
+        <div class="div-Input">
+            <input type="text" id="username">
+            <span data-placeholder="Username"></span>
+        </div>
+
+        <div class="div-Input">
+            <input type="password" id="password">
+            <span data-placeholder="Password"></span>
+        </div>
+        <input type="submit" class="botton-Login" value="Login" id="ajax_btn">
+
+        <div class="div-SignUp">
+            Don't have account?<a href="#">Sign up</a>
+        </div>
+    </form></div>
+
+</body>
+</html>

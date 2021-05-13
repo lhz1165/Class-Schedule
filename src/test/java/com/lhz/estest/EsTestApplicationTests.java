@@ -1,11 +1,15 @@
 package com.lhz.estest;
 
 import com.lhz.estest.dao.ElasticRepository;
+import org.elasticsearch.action.ActionFuture;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequestBuilder;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
@@ -17,6 +21,7 @@ import org.elasticsearch.search.SearchHit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -32,8 +37,18 @@ import  org.elasticsearch.action.search.SearchType;
 class EsTestApplicationTests {
 
 
+
+
     @Autowired
     private TransportClient client;
+    @Test
+    void del() throws IOException, InterruptedException {
+        DeleteIndexRequestBuilder twitter = client.admin().indices().prepareDelete("twitter");
+        Thread.sleep(30000);
+        AcknowledgedResponse acknowledgedResponse =twitter.execute().actionGet();
+        System.out.println(acknowledgedResponse.isAcknowledged());
+    }
+
 
     @Test
     void contextLoads() throws IOException {

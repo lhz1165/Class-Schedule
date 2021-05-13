@@ -7,6 +7,8 @@ import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
+
 @Repository
 public interface ElasticRepository extends ElasticsearchRepository<DocBean, Long> {
 
@@ -19,7 +21,6 @@ public interface ElasticRepository extends ElasticsearchRepository<DocBean, Long
 
     @Query("{\"bool\" : {\"must\" : {\"field\" : {\"secordCode.keyword\" : \"?\"}}}}")
     Page<DocBean> findBySecordCode(String secordCode, Pageable pageable);
-
 
 }
 
