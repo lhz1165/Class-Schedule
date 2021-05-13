@@ -5,18 +5,17 @@
   <title>ajax login page</title>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
   <script>
+<!--    使用get请求发送-->
     $(function () {
       $('#ajax_btn').click(function () {
         //获取用户名和密码
         username = $('#username').val()
         password = $('#password').val()
-
         //发起Ajax请求
         $.ajax({
-          'type':'post',
           'url':'/user',
           'data':{'username':username, 'password':password},
-          'contentType':'application/json',
+          // 'contentType':'application/json',
           'datatype':'json',
           'async':'true',
           'success':function (data) {
