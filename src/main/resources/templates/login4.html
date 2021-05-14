@@ -25,24 +25,23 @@
                         //成功后的回调函数
                         if (data === "succ"){
                             alert("登录成功")　　　　　　　　　　　　//成功返回首页
-                            window.location.href('www.baidu.com')
+                            location.href='http://localhost:8080/index.html'
                         }else{　　　　　　　　　　　　　　//失败打印出错误信息
-                            $('#errmsg').show().html('error! username or password is wrong!')
+                            alert("failed")
                         }
                     }
                 });
             })
         })
     </script>
-
+    <link href="style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div>
-    username:<input type="text" id="username"><br/>
-    password:<input type="password" id="password"><br/>
+    username:<input type="text" id="username" class="u"><br/>
+    password:<input type="password" id="password" class="p"><br/>
     <input type="button" value="login" id="ajax_btn">
 </div>
-<div id="message"></div>
-<div id="errmsg"></div>
+
 </body>
 </html>

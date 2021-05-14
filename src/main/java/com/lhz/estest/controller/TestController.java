@@ -18,7 +18,7 @@ public class TestController {
         if ("123".equals(user.getPassword())) {
             return "succ";
         }
-        return "succ";
+        return "faild";
     }
 
     public int getVal() {
