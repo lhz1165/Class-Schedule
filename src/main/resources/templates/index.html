@@ -1,10 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+<link rel="stylesheet" href="static/lay/css/layui.css">
+<script src="static/lay/layui.js"></script>
+<style>
+  body{
+    background-color: green;
+    overflow:hidden
+  }
+  .main{
+    width: 500px;
+    height: 400px;
+    margin: 100px auto;
+    background-color: white;
+  }
+  h1{
+    font-weight: bolder;
+    color: teal;
+    text-align: center;
+    display: block;
+    padding-top: 50px;
+  }
+  .form{
+    margin-top: 50px;
+  }
+  .layui-form-label{
+    font-weight: bolder;
+  }
+  .submit-btn{
+    margin-top: 50px;
+  }
+
+</style>
+
+
+<script>
+  //jquery必须整合jquery.cookie.js
+  layui.config({
+    base: 'static/lay/css/modules/' //假设这是cookie.js所在的目录（本页面的相对路径）
+  }).extend({ //设定模块别名
+    cookie: 'cookie' //如果cookie.js是在根目录，也可以不用设定别名,因为我cookie.js的是在根目录，所以这句话其实也不用写也行。
+  });
+
+
+
+  layui.use(['layer','form','jquery','cookie'], function(){
+    var form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.$,
+            cookie=layui.cookie;
+
+    //监听指定开关
+    form.on('switch(switchTest)', function(data){
+      layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+        offset: '6px'
+      });
+      layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+    });
+
+    //监听提交
+    form.on('submit(demo1)', function(data){
+      $.ajax({
+        type:"get",
+        url:"/login",
+        data:{
+          username:data.field.username,
+          password:data.field.password
+        },
+        success:function(result){
+          if(result.code === "200"){
+            layer.msg("登录成功",function(){
+              $.cookie('username',data.field.username);
+              window.location.href="/main.html";
+            })
+          }else{
+            layer.msg(result.message,{icon:5})
+          }
+        }
+      })
+      return false;
+    });
+
+  });
+</script>
+
 <body>
-hello
+<div class="main">
+  <h1>登录页面</h1>
+  <div class="form">
+    <form class="layui-form" action="">
+      <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-inline">
+          <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入账号" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-inline">
+          <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block submit-btn">
+          <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 </body>
 </html>

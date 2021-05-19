@@ -1,5 +1,6 @@
 package com.lhz.estest.controller;
 
+import com.lhz.estest.commom.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,40 +11,16 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class TestController {
-    @Value("${lhz.val}")
-    int val;
 
-    @PostMapping(path="/user")
-    public String val(@RequestBody User user) {
-        if ("123".equals(user.getPassword())) {
-            return "succ";
+    @GetMapping(path="/login")
+    public Result val(@RequestParam String username,@RequestParam String password) {
+        if ("123".equals(password)) {
+            return Result.failed("登录失败");
         }
-        return "faild";
+        return Result.success();
     }
 
-    public int getVal() {
-        return val;
-    }
-    static class User{
-        String username;
-        String password;
 
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    }
 
 
 }
