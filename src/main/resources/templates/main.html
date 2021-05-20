@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>登录成功</title>
-
+    <link rel="stylesheet" href="static/lay/css/layui.css">
+    <script src="static/lay/layui.js"></script>
 </head>
+
 <body>
     <h1>欢迎页面！！！</h1>
+    <label>
+        user:
+        <input type="text" value="" id="u">
+    </label>
+    <script>
+
+    layui.use(['jquery'], function() {
+        var $ = layui.$;
+        $.ajax({
+            type:"get",
+            url:"/user",
+            success:function(result){
+                console.log(result.data)
+                $("#u").val(result.data);
+            }
+        });
+
+
+    });
+</script>
 
 </body>
 </html>
