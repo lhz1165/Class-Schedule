@@ -74,7 +74,7 @@
         },
         success:function(result){
           if(result.code === "200"){
-            layer.msg("登录成功",function(){
+            layer.msg("登录成功",{icon:1, time: 50},function(){
               $.cookie('username',data.field.username);
               window.location.href="/main.html";
             })
