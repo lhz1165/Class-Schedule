@@ -39,6 +39,12 @@ public class TestController {
         return Result.success(username);
     }
 
+    @GetMapping(path="/logout")
+    public Result logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("user");
+        return Result.success();
+    }
+
 
 
 

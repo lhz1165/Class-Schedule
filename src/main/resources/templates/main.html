@@ -22,29 +22,29 @@
 </head>
 <body>
 <script>
-    window.onload = function (){
-        layui.use(['layer','form','jquery'], function() {
-            var form = layui.form
-                , layer = layui.layer
-                , $ = layui.$;
-            $(function () {
-                $.ajax({
-                    type:"get",
-                    url:"/getUser",
-                    success:function(result){
-                        if(result.code === "200"){
-                            console.log(result.data);
-                            $("#username").html(result.data);
-                        }else {
+    layui.use(['jquery'], function() {
+        var $ = layui.$;
+        $.ajax({
+            type:"get",
+            url:"/getUser",
+            success:function(result){
+                if(result.code === "200"){
+                    console.log(result.data);
+                    $("#username").html(result.data);
+                }else {
 
-                        }
-                    }
-                })
+                }
+            }
+        });
+        $("#logout").click(function(){
+            $.ajax({
+                type:"get",
+                url:"/logout"
             });
         });
-    }
-
+    });
 </script>
+
 <script>
 
 </script>
@@ -79,7 +79,7 @@
                 <dl class="layui-nav-child">
                     <dd><a href="">个人信息</a></dd>
                     <dd><a href="">设置</a></dd>
-                    <dd><a href="index.html">登出</a></dd>
+                    <dd><a href="/index.html" id="logout">登出</a></dd>
                 </dl>
             </li>
             <!-- 右边隐藏列表 -->
