@@ -17,7 +17,7 @@ import java.net.InetAddress;
  * @Description:
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class ElasticSearchConfig {
 
 

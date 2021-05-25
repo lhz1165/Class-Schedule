@@ -22,8 +22,6 @@
     layui.use(['jquery','table'], function () {
         var $ = layui.$;
         var table=layui.table;
-
-
         $.ajax({
             type: "get",
             url: "/getUser",
@@ -44,25 +42,13 @@
                   url: "/logout"
             });
         });
+        //iframe页面替换
         $("a.m").click(function (e) {
             console.log("m2------")
             e.preventDefault();
             console.log("m2++++++++")
             $("#iframeMain").attr("src",$(this).attr("href"));
         });
-        $("a.m").click(function (e) {
-            console.log("m3------")
-            e.preventDefault();
-            console.log("m3++++++++")
-            $("#iframeMain").attr("src",$(this).attr("href"));
-        });
-        $("a.m").click(function (e) {
-            console.log("m4------")
-            e.preventDefault();
-            console.log("m4++++++++"+$(this).attr("href"))
-            $("#iframeMain").attr("src",$(this).attr("href"));
-        });
-
 
     });
 </script>

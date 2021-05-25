@@ -56,14 +56,6 @@
             ,$ = layui.$,
             cookie=layui.cookie;
 
-    if ($.cookie("rmbInfo") === "true") {
-      $("#username").val($.cookie("username"));
-      console.log($.cookie("username"))
-      $("#password").val("12345");
-      console.log(12345)
-    }
-
-
     //监听指定开关
     form.on('switch(switchTest)', function(data){
       layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
@@ -88,7 +80,6 @@
                 // 选中，则设置cookie对象7天生效
                 // 将用户信息设置到cookie中
                 $.cookie("username",$("#username").val(), {expires:1});
-                $.cookie("password",$("#password").val(), {expires:1});
                 $.cookie("rmbInfo", "true", { expires: 1 });
               }
               window.location.href="/main.html";
