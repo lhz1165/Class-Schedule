@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../static/lay/css/layui.css">
+<script src="../static/lay/layui.js"></script>
+<script>
+
+
+  layui.use(['jquery','table'], function () {
+    var $ = layui.$;
+    var table=layui.table;
+
+    //第一个实例
+    table.render({
+      elem: '#demo'
+      ,height: 312
+      ,url: '/userList' //数据接口
+      ,page: true //开启分页
+      ,cols: [[ //表头
+        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+        ,{field: 'username', title: '用户名', width:80}
+        ,{field: 'password', title: '密码', width:80, sort: true}
+      ]],
+      parseData: function(res){ //res 即为原始返回的数据
+        console.log(res.data.total);
+        console.log(res.data.item);
+
+        return {
+          "code": 0, //解析接口状态
+          "count": res.data.total, //解析数据长度
+          "data": res.data.item //解析数据列表
+        };
+      }
+    });
+  });
+</script>
+<body>
+
+<div style="width: 100%;height: 100%">
+
+
+
+    <h1>lalalalaal</h1>
+    <h2>aaaaaa</h2>
+
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+
+    <div class="layui-btn-container">
+      <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+      <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+      <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+    </div>
+
+
+</div>
+
+</body>
+</html>
