@@ -9,15 +9,15 @@
         $(function () {
             $('#ajax_btn').click(function () {
                 //获取用户名和密码
-                var user = {};
+                var student = {};
 
-                user["username"] = $('#username').val();
-                user["password"] = $('#password').val();
+                student["username"] = $('#username').val();
+                student["password"] = $('#password').val();
                 //发起Ajax请求
                 $.ajax({
                     'type':'post',
-                    'url':'/user',
-                    'data':JSON.stringify(user),
+                    'url':'/student',
+                    'data':JSON.stringify(student),
                     'contentType':'application/json',
                     'datatype':'json',
                     'async':'true',

@@ -1,14 +1,12 @@
 package com.lhz.estest.controller;
 
 import com.lhz.estest.commom.Result;
-import com.lhz.estest.eneity.User;
-import org.springframework.data.domain.Page;
+import com.lhz.estest.eneity.Student;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -20,17 +18,17 @@ public class ListController {
 
 	@GetMapping("userList")
 	public Result getUserList(@RequestParam Integer page,@RequestParam Integer limit) {
-		List<User> users = new ArrayList<>();
+		List<Student> students = new ArrayList<>();
 		for (int i = 1; i < 150; i++) {
-			User user = new User();
-			user.setId(i);
-			user.setUsername("aaa" + i);
-			user.setPassword("1234567");
-			users.add(user);
+			Student student = new Student();
+			student.setId(i);
+			student.setName("aaa" + i);
+			student.setPassword("1234567");
+			students.add(student);
 		}
-		int i = users.size() / limit;
-		List<User> users1 = users.subList((page - 1) * i,(page - 1)* i + limit);
-		return Result.success(new Page<User>(page,users.size(),users1));
+		int i = students.size() / limit;
+		List<Student> users1 = students.subList((page - 1) * i,(page - 1)* i + limit);
+		return Result.success(new Page<Student>(page, students.size(),users1));
 	}
 	static class  Page<T>{
 		int page;
