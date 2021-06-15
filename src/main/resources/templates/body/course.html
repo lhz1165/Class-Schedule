@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>我的课表</title>
+</head>
+<link rel="stylesheet" href="../static/lay/css/layui.css">
+<script src="../static/lay/layui.js"></script>
+<body background="background.png">
+<script>
+    layui.use(['jquery', 'table'], function () {
+        var $ = layui.$;
+
+        $("#add").click(function () {
+            layer.open({
+                type: 1,
+                area: ['500px', '600px'],
+                title: '添加/修改课程'
+                , content: $("#test"),
+                shade: 0,
+                btn: ['提交', '重置']
+                , btn1: function (index, layero) {
+                    var kk = $("#username").val();
+                    alert(kk);
+                },
+                btn2: function (index, layero) {
+                    alert("2222");
+                    return false;
+                },
+                cancel: function (layero, index) {
+                    layer.closeAll();
+                }
+            });
+        });
+
+        $("#edit").click(function () {
+            layer.open({
+                type: 1,
+                area: ['500px', '600px'],
+                title: 'tianxie'
+                , content: $("#test"),
+                shade: 0,
+                btn: ['提交', '重置']
+                , btn1: function (index, layero) {
+                    var kk = $("#username").val();
+                    alert(kk);
+                },
+                btn2: function (index, layero) {
+                    alert("2222");
+                    return false;
+                },
+                cancel: function (layero, index) {
+                    layer.closeAll();
+                }
+            });
+        });
+
+        $("#del").click(function () {
+            layer.confirm('是否删除此课程?', {icon: 3, title:'提示'}, function(index){
+                //do something
+                layer.close(index);
+            });
+        });
+
+
+    });
+
+
+</script>
+<table width="100%" align="center" style="border: 1px solid #aaa">
+    <caption>
+        <h2>我的课表</h2>
+    </caption>
+    <tr height="37px">
+        <!-- 标题栏-->
+        <th width="60px" bgcolor="DarkOrchid" style="color: white">节次</th>
+        <th width="100px" bgcolor="DarkOrchid" style="color: white">上课时间</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周一</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周二</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周三</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周四</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
+    </tr>
+    <tr height="37px" align="center">
+        <td align="center">1</td>
+        <td rowspan="1">8:00-8:45</td>
+        <td rowspan="13" bgcolor="Cyan">我爱学习<br/>学习爱我</td>
+        <td rowspan="5"></td>
+        <td rowspan="2" bgcolor="orange">WEB应用技术<br/>@D座301</td>
+        <td rowspan="2"></td>
+        <td rowspan="2" bgcolor="hotpink">数据库原理<br/>@E407</td>
+        <td rowspan="2"></td>
+        <td rowspan="2"></td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>2</td>
+        <td rowspan="1">8:55-9:40</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>3</td>
+        <td rowspan="1">10:00-10:45</td>
+        <td rowspan="3"></td>
+        <td rowspan="2" bgcolor="springgreen">计算机网络<br/>@E阶梯教室202</td>
+        <td rowspan="2" bgcolor="Aquamarine">计算理论导引<br/>@E208</td>
+        <td rowspan="2" bgcolor="Peru">系统分析与设计<br/>@D座406</td>
+        <td rowspan="2" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>4</td>
+        <td rowspan="1">10:55-11:40</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>5</td>
+        <td rowspan="1">11:50-12:35</td>
+        <td rowspan="3"></td>
+        <td rowspan="1"></td>
+        <td rowspan="3"></td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>6</td>
+        <td rowspan="1">14:00-14:45</td>
+        <td rowspan="2" bgcolor="SpringGreen">计算机网络<br/>@E阶梯教室202</td>
+        <td rowspan="2" bgcolor="HotPink">数据库原理<br/>@E407</td>
+        <td rowspan="2" bgcolor="Thistle">算法设计与分析<br/>@E208</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>7</td>
+        <td rowspan="1">14:55-15:40</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>8</td>
+        <td rowspan="1">16:00-16:45</td>
+        <td rowspan="3"></td>
+        <td rowspan="3" bgcolor="GreenYellow">企业建模与系统集成<br/>@D座503</td>
+        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>
+        <td rowspan="2" bgcolor="RoyalBlue">智能系统<br/>@E407</td>
+        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>9</td>
+        <td rowspan="1">16:55-17:40</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>0</td>
+        <td rowspan="1">17:50-18:35</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>A</td>
+        <td rowspan="1">19:20-20:05</td>
+        <td rowspan="2" bgcolor="MediumOrchid">软件案例分析@G座304</td>
+        <td rowspan="3"></td>
+        <td rowspan="3"></td>
+        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>B</td>
+        <td rowspan="1">20:15-21:00</td>
+    </tr>
+    <tr height="37px" align="center">
+        <td>C</td>
+        <td rowspan="1">21:10-21:55</td>
+    </tr>
+</table>
+
+<button id="add" type="button" class="layui-btn layui-btn-radius layui-btn-primary">添加/修改课程</button>
+<button id="del" type="button" class="layui-btn layui-btn-radius layui-btn-danger">删除课程</button>
+
+
+<form class="layui-form" id="test" style="display:none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入课程名字" autocomplete="on"
+                   class="layui-input" id="username" style="width:200px">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">教室名</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入教室名" autocomplete="on"
+                   class="layui-input" id="classroom" style="width:200px">
+        </div>
+    </div>
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">密码框</label>-->
+<!--        <div class="layui-input-inline">-->
+<!--            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="on"-->
+<!--                   class="layui-input">-->
+<!--        </div>-->
+<!--        <div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+<!--    </div>-->
+
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择框时间段</label>
+        <div class="layui-input-block">
+            <select name="city" lay-verify="required">
+                <option value="">请选择时间的段</option>
+                <option value="">8:00-8:45</option>
+                <option value="">8:55-9:40</option>
+                <option value="">10:00-10:45</option>
+                <option value="">10:55-11:40</option>
+                <option value="">11:50-12:35</option>
+                <option value="">14:00-14:45</option>
+                <option value="">14:55-15:40</option>
+                <option value="">16:00-16:45</option>
+                <option value="">16:55-17:40</option>
+                <option value="">17:50-18:35</option>
+                <option value="">19:20-20:05</option>
+                <option value="">20:15-21:00</option>
+                <option value="">21:10-21:55</option>
+            </select>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
