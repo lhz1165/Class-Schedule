@@ -1,12 +1,356 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <title>我的课表</title>
 </head>
-<body>
-<h1>ccccccccccccccccccccccc</h1>
+<link rel="stylesheet" href="../static/lay/css/layui.css">
+<script src="../static/lay/layui.js"></script>
+<body background="background.png">
+<script>
+    layui.use(['jquery'], function () {
+        let $ = layui.$;
+        $("#add").click(function () {
+            layer.open({
+                type: 1,
+                area: ['500px', '600px'],
+                title: '添加/修改课程'
+                , content: $("#inlineForm"),
+                shade: 0,
+                btn: ['提交', '取消']
+                , btn1: function (index, layero) {
+                   //提交表单请求增加接口
+                    $.ajax({
+                        type: "get",
+                        url: "/addOrUpdateCourse",
+                        data:{
+                            day: $("#day  option:selected").val(),
+                            startTime:$("#startTime  option:selected").text(),
+                            endTime:$("#endTime  option:selected").text(),
+                            courseName:layero.find('#courseName').val(),
+                            courseAddress:layero.find('#courseAddress').val(),
+                            courseStartNo:$("#startTime  option:selected").val(),
+                            courseEndNo:$("#endTime  option:selected").val(),
+                        },
+                        success: function (result) {
+                            if (result.data === "新增成功") {
+                                layer.msg("新增成功",{icon:1, time: 200},function(){
+                                    window.parent.location.reload();
+                                })
+                            } else if (result.data === "修改成功") {
+                                layer.msg("修改成功",{icon:1, time: 200},function(){
+                                    window.parent.location.reload();
+                                })
+                            }else {
+                                layer.msg("失败",{icon:1, time: 200},function(){
+                                    window.parent.location.reload();
+                                })
+                            }
+                        }
+                    });
+                    layer.closeAll();
+                },
+                btn2: function (index, layero) {
+                    layer.closeAll();
+                    return false;
+                },
+                cancel: function (layero, index) {
+                    layer.closeAll();
+                }
+            });
+        });
+        $("#del").click(function () {
 
+            layer.open({
+                type: 1,
+                area: ['500px', '400px'],
+                title: 'tianxie',
+                content: $("#inlineDelForm"),
+                shade: 0,
+                btn: ['提交', '取消']
+                , btn1: function (index, layero) {
+                    $.ajax({
+                        type: "get",
+                        url: "/delCourse",
+                        data:{
+                            day: $("#del_day  option:selected").val(),
+                            startTime:$("#del_startTime  option:selected").text(),
+                        },
+                        success: function (result) {
+                            if (result.code === "200") {
+                                layer.msg("删除",{icon:1, time: 200},function(){
+                                    window.parent.location.reload();
+                                })
+                            }else {
+                                layer.msg("失败",{icon:1, time: 200},function(){
+                                    window.parent.location.reload();
+                                })
+                            }
+                        }
+                    });
+                    layer.closeAll();
+                },
+                btn2: function (index, layero) {
+                    layer.closeAll();
+                    return false;
+                },
+                cancel: function (layero, index) {
+                    layer.closeAll();
+                }
+            });
+        });
+
+
+
+    });
+</script>
+<!--渲染课程表的方法-->
+<script>
+    layui.use(['jquery'], function () {
+        let $ = layui.$;
+        $.ajax({
+            type: "get",
+            url: "/myCourse",
+            success: function (result) {
+                if (result.code === "200") {
+                    let courseList = result.data;
+                    console.log(courseList);
+                    for (let i = 0; i < courseList.length; i++) {
+                        let course = courseList[i];
+                        let startTime = course.startTime;
+                        let day = course.day;
+
+                    }
+                }else {
+                    layer.msg("失败",{icon:1, time: 200},function(){
+                        window.parent.location.reload();
+                    })
+                }
+            }
+        });
+
+    });
+</script>
+<table width="100%" align="center" style="border: 1px solid #aaa">
+    <caption>
+        <h2>我的课表</h2>
+    </caption>
+    <tr height="37px">
+        <!-- 标题栏-->
+        <th width="60px" bgcolor="DarkOrchid" style="color: white">节次</th>
+        <th width="100px" bgcolor="DarkOrchid" style="color: white">上课时间</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周一</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周二</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周三</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周四</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
+    </tr>
+    <tr height="37px" align="center" id="t1">
+        <td align="center">1</td>
+        <td rowspan="1">8:00-8:45</td>
+<!--        <td rowspan="13" bgcolor="Cyan">我爱学习<br/>学习爱我</td>-->
+<!--        <td rowspan="5"></td>-->
+<!--        <td rowspan="2" bgcolor="orange">WEB应用技术<br/>@D座301</td>-->
+<!--        <td rowspan="2"></td>-->
+<!--        <td rowspan="2" bgcolor="hotpink">数据库原理<br/>@E407</td>-->
+<!--        <td rowspan="2"></td>-->
+<!--        <td rowspan="2"></td>-->
+    </tr>
+    <tr height="37px" align="center" id="t2">
+        <td>2</td>
+        <td rowspan="1">8:55-9:40</td>
+    </tr>
+<!--    tr代表行 td代表列  rowspan代表列宽度-->
+    <tr height="37px" align="center" id="t3">
+        <td>3</td>
+        <td rowspan="1">10:00-10:45</td>
+<!--        空白-->
+        <td rowspan="3"></td>
+
+<!--        <td rowspan="2" bgcolor="springgreen">计算机网络<br/>@E阶梯教室202</td>-->
+<!--        <td rowspan="2" bgcolor="Aquamarine">计算理论导引<br/>@E208</td>-->
+<!--        <td rowspan="2" bgcolor="Peru">系统分析与设计<br/>@D座406</td>-->
+<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
+    </tr>
+    <tr height="37px" align="center" id="t4">
+        <td>4</td>
+        <td rowspan="1">10:55-11:40</td>
+    </tr>
+    <tr height="37px" align="center" id="t4">
+        <td>5</td>
+        <td rowspan="1">11:50-12:35</td>
+        <td rowspan="3"></td>
+        <td rowspan="1"></td>
+        <td rowspan="3"></td>
+    </tr>
+    <tr height="37px" align="center" id="t6">
+        <td>6</td>
+        <td rowspan="1">14:00-14:45</td>
+<!--        <td rowspan="2" bgcolor="SpringGreen">计算机网络<br/>@E阶梯教室202</td>-->
+<!--        <td rowspan="2" bgcolor="HotPink">数据库原理<br/>@E407</td>-->
+<!--        <td rowspan="2" bgcolor="Thistle">算法设计与分析<br/>@E208</td>-->
+    </tr>
+    <tr height="37px" align="center" id="t7">
+        <td>7</td>
+        <td rowspan="1">14:55-15:40</td>
+    </tr>
+    <tr height="37px" align="center" id="t8">
+        <td>8</td>
+        <td rowspan="1">16:00-16:45</td>
+        <td rowspan="3"></td>
+<!--        <td rowspan="3" bgcolor="GreenYellow">企业建模与系统集成<br/>@D座503</td>-->
+<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
+<!--        <td rowspan="2" bgcolor="RoyalBlue">智能系统<br/>@E407</td>-->
+<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
+    </tr>
+    <tr height="37px" align="center" id="t9">
+        <td>9</td>
+        <td rowspan="1">16:55-17:40</td>
+    </tr>
+    <tr height="37px" align="center" id="t10">
+        <td>0</td>
+        <td rowspan="1">17:50-18:35</td>
+    </tr>
+    <tr height="37px" align="center" id="t11">
+        <td>A</td>
+        <td rowspan="1">19:20-20:05</td>
+<!--        <td rowspan="4" bgcolor="MediumOrchid">软件案例分析@G座304</td>-->
+<!--        <td rowspan="3"></td>-->
+<!--        <td rowspan="3"></td>-->
+<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
+    </tr>
+    <tr height="37px" align="center" id="t12">
+        <td>B</td>
+        <td rowspan="1">20:15-21:00</td>
+    </tr>
+    <tr height="37px" align="center" id="t13">
+        <td>C</td>
+        <td rowspan="1">21:10-21:55</td>
+    </tr>
+</table>
+
+<button id="add" type="button" class="layui-btn layui-btn-radius layui-btn-primary">添加/修改课程</button>
+<button id="del" type="button" class="layui-btn layui-btn-radius layui-btn-danger">删除课程</button>
+
+
+<form class="layui-form" id="inlineForm" style="display:none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名</label>
+        <div class="layui-input-block">
+            <input type="text" name="courseName" required lay-verify="required" placeholder="请输入课程名字" autocomplete="on"
+                   class="layui-input" id="courseName" style="width:200px">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">教室名</label>
+        <div class="layui-input-block">
+            <input type="text" name="courseAddress" required lay-verify="required" placeholder="请输入教室名" autocomplete="on"
+                   class="layui-input" id="courseAddress" style="width:200px">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择框时间段</label>
+        <div class="layui-input-block">
+            <select id="startTime" lay-verify="required">
+                <option value="">请选择开始时间</option>
+                <option value="1">8:00</option>
+                <option value="2">8:55</option>
+                <option value="3">10:00</option>
+                <option value="4">10:55</option>
+                <option value="5">11:50</option>
+                <option value="6">14:00</option>
+                <option value="7">14:55</option>
+                <option value="8">16:00</option>
+                <option value="9">16:55</option>
+                <option value="10">17:50</option>
+                <option value="11">19:20</option>
+                <option value="12">20:15</option>
+                <option value="13">21:10</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择框时间段</label>
+        <div class="layui-input-block">
+            <select id="endTime" lay-verify="required">
+                <option value="">请选择时间的段</option>
+                <option value="2">8:45</option>
+                <option value="3">9:40</option>
+                <option value="4">10:45</option>
+                <option value="5">11:40</option>
+                <option value="6">12:35</option>
+                <option value="7">14:45</option>
+                <option value="8">15:40</option>
+                <option value="9">16:45</option>
+                <option value="10">17:40</option>
+                <option value="11">18:35</option>
+                <option value="12">20:05</option>
+                <option value="13">21:00</option>
+                <option value="14">21:55</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择星期几</label>
+        <div class="layui-input-block">
+            <select id="day" lay-verify="required">
+                <option value="">选择星期几</option>
+                <option value="1">星期一</option>
+                <option value="2">星期二</option>
+                <option value="3">星期三</option>
+                <option value="4">星期四</option>
+                <option value="5">星期五</option>
+                <option value="6">星期六</option>
+            </select>
+        </div>
+    </div>
+
+</form>
+
+<form class="layui-form" id="inlineDelForm" style="display:none">
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择框时间段</label>
+        <div class="layui-input-block">
+            <select id="del_startTime" lay-verify="required">
+                <option value="">请选择开始时间</option>
+                <option value="8:00">8:00</option>
+                <option value="8:55">8:55-</option>
+                <option value="10:00">10:00</option>
+                <option value="10:55">10:55</option>
+                <option value="11:50">11:50</option>
+                <option value="14:00">14:00</option>
+                <option value="14:55">14:55</option>
+                <option value="16:00">16:00</option>
+                <option value="16:55">16:55</option>
+                <option value="17:50">17:50</option>
+                <option value="19:20">19:20</option>
+                <option value="20:15">20:15</option>
+                <option value="21:10">21:10</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="width:400px">
+        <label class="layui-form-label">选择要删除课程星期几</label>
+        <div class="layui-input-block">
+            <select id="del_day" lay-verify="required">
+                <option value="">选择星期几</option>
+                <option value="1">星期一</option>
+                <option value="2">星期二</option>
+                <option value="3">星期三</option>
+                <option value="4">星期四</option>
+                <option value="5">星期五</option>
+                <option value="6">星期六</option>
+            </select>
+        </div>
+    </div>
+
+
+</form>
 
 </body>
 </html>

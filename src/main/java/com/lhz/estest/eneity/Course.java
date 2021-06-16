@@ -26,8 +26,11 @@ public class Course {
    /*星期几的课*/
    Integer courseDay;
 
-   String timePeriod;
+   String startTime;
 
-   Integer courseIndex;
+   String endTime;
+   /*几节课那么长*/
+   Integer courseLen;
+
 
 }

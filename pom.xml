@@ -72,7 +72,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.11.4</version>
         </dependency>
-
+        <!--mybatis plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
@@ -84,7 +84,7 @@
             <version>2.3.31</version>
         </dependency>
 
-
+        <!--swagger ui-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
