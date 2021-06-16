@@ -1,7 +1,6 @@
 package com.lhz.estest;
 
-import com.lhz.estest.eneity.Student;
-import com.lhz.estest.mapper.UserMapper;
+import com.lhz.estest.mapper.StudentMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 class EsTestApplicationTests {
     @Autowired
-    UserMapper userMapper;
+    StudentMapper studentMapper;
 
     @Test
     public void insert() {
-        Student student = new Student();
+        com.lhz.estest.eneity.Student student = new com.lhz.estest.eneity.Student();
         student.setPassword("123");
         student.setName("admin");
         student.setUserNo("15200143");
-        userMapper.insert(student);
+        this.studentMapper.insert(student);
     }
 
 

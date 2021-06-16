@@ -7,6 +7,6 @@ import com.lhz.estest.eneity.Student;
  * @author lhzlhz
  * @create 2021/6/15
  */
-public interface UserMapper extends BaseMapper<Student> {
+public interface StudentMapper extends BaseMapper<com.lhz.estest.eneity.Student> {
 
 }
