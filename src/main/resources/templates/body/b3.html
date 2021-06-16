@@ -113,14 +113,29 @@
             url: "/myCourse",
             success: function (result) {
                 if (result.code === "200") {
-                    let courseList = result.data;
-                    console.log(courseList);
-                    for (let i = 0; i < courseList.length; i++) {
-                        let course = courseList[i];
-                        let startTime = course.startTime;
-                        let day = course.day;
+                    let courseListMap = result.data;
+                    console.log(courseListMap);
+                    for(let key in courseListMap) {
+                        let courseList = courseListMap[key];
+                        //为每一<tr> 往下面填充 <td ></td>
+                        let prevDay = 0;
+                        for (let i = 0; i < courseList.length; i++) {
+                            let myCourse = courseList[i];
+                            let courseNo = myCourse.courseNo;//  从几行开始
+                            console.log("从几行开始"+courseNo);
+                            let courseLen = myCourse.courseLen;// rowspan
+                            console.log("多长"+courseLen)
+                            let day = myCourse.day;//     不用管 知道len就够了
+                            let courseName = myCourse.courseName;
+                            let courseAddress = myCourse.courseAddress;
+
+                            // $("#t"+courseNo).append('<td rowspan='+courseLen +' bgcolor="Cyan">'+courseName+'<br/>'+courseAddress+'</td>')
+
+                        }
 
                     }
+
+
                 }else {
                     layer.msg("失败",{icon:1, time: 200},function(){
                         window.parent.location.reload();
@@ -131,7 +146,7 @@
 
     });
 </script>
-<table width="100%" align="center" style="border: 1px solid #aaa">
+<table width="100%" align="center" style="border: 1px solid #aaa" id="course_table">
     <caption>
         <h2>我的课表</h2>
     </caption>
@@ -147,17 +162,19 @@
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
     </tr>
+
     <tr height="37px" align="center" id="t1">
         <td align="center">1</td>
         <td rowspan="1">8:00-8:45</td>
-<!--        <td rowspan="13" bgcolor="Cyan">我爱学习<br/>学习爱我</td>-->
-<!--        <td rowspan="5"></td>-->
+<!--        <td rowspan="1" bgcolor="Cyan">我爱学习<br/>学习爱我</td>-->
+<!--        <td rowspan="1"></td>-->
 <!--        <td rowspan="2" bgcolor="orange">WEB应用技术<br/>@D座301</td>-->
 <!--        <td rowspan="2"></td>-->
 <!--        <td rowspan="2" bgcolor="hotpink">数据库原理<br/>@E407</td>-->
 <!--        <td rowspan="2"></td>-->
 <!--        <td rowspan="2"></td>-->
     </tr>
+
     <tr height="37px" align="center" id="t2">
         <td>2</td>
         <td rowspan="1">8:55-9:40</td>
@@ -181,9 +198,9 @@
     <tr height="37px" align="center" id="t4">
         <td>5</td>
         <td rowspan="1">11:50-12:35</td>
-        <td rowspan="3"></td>
-        <td rowspan="1"></td>
-        <td rowspan="3"></td>
+<!--        <td rowspan="3"></td>-->
+<!--        <td rowspan="1"></td>-->
+<!--        <td rowspan="3"></td>-->
     </tr>
     <tr height="37px" align="center" id="t6">
         <td>6</td>
@@ -199,7 +216,7 @@
     <tr height="37px" align="center" id="t8">
         <td>8</td>
         <td rowspan="1">16:00-16:45</td>
-        <td rowspan="3"></td>
+<!--        <td rowspan="3"></td>-->
 <!--        <td rowspan="3" bgcolor="GreenYellow">企业建模与系统集成<br/>@D座503</td>-->
 <!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
 <!--        <td rowspan="2" bgcolor="RoyalBlue">智能系统<br/>@E407</td>-->
@@ -210,11 +227,11 @@
         <td rowspan="1">16:55-17:40</td>
     </tr>
     <tr height="37px" align="center" id="t10">
-        <td>0</td>
+        <td>10</td>
         <td rowspan="1">17:50-18:35</td>
     </tr>
     <tr height="37px" align="center" id="t11">
-        <td>A</td>
+        <td>11</td>
         <td rowspan="1">19:20-20:05</td>
 <!--        <td rowspan="4" bgcolor="MediumOrchid">软件案例分析@G座304</td>-->
 <!--        <td rowspan="3"></td>-->
@@ -222,11 +239,11 @@
 <!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
     </tr>
     <tr height="37px" align="center" id="t12">
-        <td>B</td>
+        <td>12</td>
         <td rowspan="1">20:15-21:00</td>
     </tr>
     <tr height="37px" align="center" id="t13">
-        <td>C</td>
+        <td>13</td>
         <td rowspan="1">21:10-21:55</td>
     </tr>
 </table>
