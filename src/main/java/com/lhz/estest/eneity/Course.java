@@ -32,5 +32,7 @@ public class Course {
    /*几节课那么长*/
    Integer courseLen;
 
+   String courseColor;
+
 
 }

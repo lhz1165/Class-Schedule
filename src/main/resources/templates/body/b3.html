@@ -60,7 +60,6 @@
             });
         });
         $("#del").click(function () {
-
             layer.open({
                 type: 1,
                 area: ['500px', '400px'],
@@ -104,6 +103,8 @@
 
     });
 </script>
+
+
 <!--渲染课程表的方法-->
 <script>
     layui.use(['jquery'], function () {
@@ -116,26 +117,25 @@
                     let courseListMap = result.data;
                     console.log(courseListMap);
                     for(let key in courseListMap) {
+                        //yi lie
                         let courseList = courseListMap[key];
-                        //为每一<tr> 往下面填充 <td ></td>
-                        let prevDay = 0;
+                        //bianlie meiyi lie td
                         for (let i = 0; i < courseList.length; i++) {
+                            console.log(courseList[i])
                             let myCourse = courseList[i];
                             let courseNo = myCourse.courseNo;//  从几行开始
-                            console.log("从几行开始"+courseNo);
-                            let courseLen = myCourse.courseLen;// rowspan
-                            console.log("多长"+courseLen)
-                            let day = myCourse.day;//     不用管 知道len就够了
                             let courseName = myCourse.courseName;
                             let courseAddress = myCourse.courseAddress;
-
-                            // $("#t"+courseNo).append('<td rowspan='+courseLen +' bgcolor="Cyan">'+courseName+'<br/>'+courseAddress+'</td>')
-
+                            let courseColor = myCourse.courseColor;
+                            if ("white"===courseName){
+                                console.log("white");
+                                $("#t"+key).append('<td rowspan="1"></td>')
+                            }else {
+                                console.log(courseName);
+                                $("#t"+key).append('<td rowspan= "1" bgcolor='+courseColor+'>'+courseName+'<br/>'+'@'+courseAddress+'</td>')
+                            }
                         }
-
                     }
-
-
                 }else {
                     layer.msg("失败",{icon:1, time: 200},function(){
                         window.parent.location.reload();
@@ -143,8 +143,13 @@
                 }
             }
         });
-
     });
+
+
+
+
+
+
 </script>
 <table width="100%" align="center" style="border: 1px solid #aaa" id="course_table">
     <caption>
@@ -154,13 +159,13 @@
         <!-- 标题栏-->
         <th width="60px" bgcolor="DarkOrchid" style="color: white">节次</th>
         <th width="100px" bgcolor="DarkOrchid" style="color: white">上课时间</th>
-        <th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周一</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周二</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周三</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周四</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周五</th>
         <th width="150px" bgcolor="DarkOrchid" style="color: white">周六</th>
+        <th width="150px" bgcolor="DarkOrchid" style="color: white">周日</th>
     </tr>
 
     <tr height="37px" align="center" id="t1">
@@ -184,7 +189,7 @@
         <td>3</td>
         <td rowspan="1">10:00-10:45</td>
 <!--        空白-->
-        <td rowspan="3"></td>
+<!--        <td rowspan="3"></td>-->
 
 <!--        <td rowspan="2" bgcolor="springgreen">计算机网络<br/>@E阶梯教室202</td>-->
 <!--        <td rowspan="2" bgcolor="Aquamarine">计算理论导引<br/>@E208</td>-->
@@ -216,11 +221,6 @@
     <tr height="37px" align="center" id="t8">
         <td>8</td>
         <td rowspan="1">16:00-16:45</td>
-<!--        <td rowspan="3"></td>-->
-<!--        <td rowspan="3" bgcolor="GreenYellow">企业建模与系统集成<br/>@D座503</td>-->
-<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
-<!--        <td rowspan="2" bgcolor="RoyalBlue">智能系统<br/>@E407</td>-->
-<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
     </tr>
     <tr height="37px" align="center" id="t9">
         <td>9</td>
@@ -233,10 +233,6 @@
     <tr height="37px" align="center" id="t11">
         <td>11</td>
         <td rowspan="1">19:20-20:05</td>
-<!--        <td rowspan="4" bgcolor="MediumOrchid">软件案例分析@G座304</td>-->
-<!--        <td rowspan="3"></td>-->
-<!--        <td rowspan="3"></td>-->
-<!--        <td rowspan="3" bgcolor="DeepSkyBlue">中国近代社会转型<br/>@E阶梯教室101</td>-->
     </tr>
     <tr height="37px" align="center" id="t12">
         <td>12</td>
@@ -248,8 +244,8 @@
     </tr>
 </table>
 
-<button id="add" type="button" class="layui-btn layui-btn-radius layui-btn-primary">添加/修改课程</button>
-<button id="del" type="button" class="layui-btn layui-btn-radius layui-btn-danger">删除课程</button>
+<button id="add" type="button" class="layui-btn  layui-btn-primary">添加/修改课程</button>
+<button id="del" type="button" class="layui-btn  layui-btn-danger">删除课程</button>
 
 
 <form class="layui-form" id="inlineForm" style="display:none">
@@ -322,6 +318,7 @@
                 <option value="4">星期四</option>
                 <option value="5">星期五</option>
                 <option value="6">星期六</option>
+                <option value="7">星期日</option>
             </select>
         </div>
     </div>
@@ -362,6 +359,7 @@
                 <option value="4">星期四</option>
                 <option value="5">星期五</option>
                 <option value="6">星期六</option>
+                <option value="7">星期日</option>
             </select>
         </div>
     </div>

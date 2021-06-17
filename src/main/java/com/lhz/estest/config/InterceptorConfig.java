@@ -21,8 +21,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**")
 				.addResourceLocations("classpath:/static/","classpath:/templates/");
-		registry.
-				addResourceHandler("/swagger-ui/**")
+		registry.addResourceHandler("/swagger-ui/**")
 				.addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
 				.resourceChain(false);
 		super.addResourceHandlers(registry);
