@@ -20,6 +20,9 @@
 
 http://localhost:8081/index.html
 
+接口文档地址
+http://10.133.3.22:8081/swagger-ui/index.html
+
 
 
 ![1](/pic/1.png)
