@@ -1,4 +1,4 @@
-# 个人课程表管理
+# springboot+html 个人课程表管理
 **项目介绍**：个人课程表管理工具，可以根据时间来修改自己的课表，新增自己的课程和教室相关信息，达到查阅课程信息的目的。
 
 这个项目是纯前后端分离，没有模板引擎，交互完全采用ajax来传递json数据。
@@ -20,26 +20,29 @@
 
 http://localhost:8081/index.html
 
-
-
-![1](D:\lhz\myproject\es-test\pic\1.png)
-
-
+接口文档地址
+http://10.133.3.22:8081/swagger-ui/index.html
 
 
 
-![2](D:\lhz\myproject\es-test\pic\2.png)
+![1](/pic/1.png)
 
-![3](D:\lhz\myproject\es-test\pic\3.png)
+
+
+
+
+![2](/pic/2.png)
+
+![3](/pic/3.png)
 
 
 
 下面这是添加/修改课程，如果开始时间覆盖了那么直接修改这个课程，开始时间没覆盖则新增
 
-![4](D:\lhz\myproject\es-test\pic\4.png)
+![4](/pic/4.png)
 
 
 
 删除某个课程
 
-![5](D:\lhz\myproject\es-test\pic\5.png)
+![5](/pic/5.png)
