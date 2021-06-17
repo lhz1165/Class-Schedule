@@ -39,7 +39,7 @@ http://10.133.3.22:8081/swagger-ui/index.html
 
 下面这是添加/修改课程，如果开始时间覆盖了那么直接修改这个课程，开始时间没覆盖则新增
 
-![4](D:\lhz\myproject\es-test\pic\4.png)
+![4](/pic/4.png)
 
 
 
