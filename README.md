@@ -22,15 +22,15 @@ http://localhost:8081/index.html
 
 
 
-![1](D:\lhz\myproject\es-test\pic\1.png)
+![1](/pic/1.png)
 
 
 
 
 
-![2](D:\lhz\myproject\es-test\pic\2.png)
+![2](/pic/2.png)
 
-![3](D:\lhz\myproject\es-test\pic\3.png)
+![3](/pic/3.png)
 
 
 
@@ -42,4 +42,4 @@ http://localhost:8081/index.html
 
 删除某个课程
 
-![5](D:\lhz\myproject\es-test\pic\5.png)
+![5](/pic/5.png)
