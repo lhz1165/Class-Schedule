@@ -8,54 +8,113 @@
 <script src="../static/lay/layui.js"></script>
 <script>
 
+    layui.use(['layer','form','jquery'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.$
 
-  layui.use(['jquery','table'], function () {
-    var $ = layui.$;
-    var table=layui.table;
+      $.ajax({
+          type: "get",
+          url: "/getUserInfo",
+          success: function (result) {
+              if (result.code === "200"){
+                  let student = result.data;
+                  $("#userNo").val(student.userNo);
+                  $("#name").val(student.name);
+                  $("#password").val(student.password);
+              }
+          }
+      });
 
-    //第一个实例
-    table.render({
-      elem: '#demo'
-      ,height: 312
-      ,url: '/userList' //数据接口
-      ,page: true //开启分页
-      ,cols: [[ //表头
-        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-        ,{field: 'username', title: '用户名', width:80}
-        ,{field: 'password', title: '密码', width:80, sort: true}
-      ]],
-      parseData: function(res){ //res 即为原始返回的数据
-        console.log(res.data.total);
-        console.log(res.data.item);
+        form.on('submit(edit)', function(data){
+          $.ajax({
+              type: "get",
+              url: "/edit",
+              data:{
+                  name: $("#name").val(),
+                  password:$("#password").val()
+              },
+              success: function (result) {
+                  if (result.code === "200"){
+                      layer.msg("修改成功",{icon:1, time: 100},function(){
+                          //用window写会导致嵌套
+                          //通过?id=b1 去mian ，刷新的时候用它来判断使用哪个frame们这里为了防止跳转到默认
+                          //所以加了参数
+                          top.location.href="/main.html?id=b1";
+                      })
+                  }
+              }
+          });
+          return false;
+      });
 
-        return {
-          "code": 0, //解析接口状态
-          "count": res.data.total, //解析数据长度
-          "data": res.data.item //解析数据列表
-        };
-      }
-    });
+
+
   });
+</script>
+
+<!--返回主页面-->
+<script>
+    layui.use(['jquery'], function(){
+        var $ = layui.$;
+        $("#back").click(function(){
+            top.location.href="/main.html?id=b3";
+        });
+    })
 </script>
 <body>
 
-<div style="width: 100%;height: 100%">
+<div id="kPage" class="layui-fluid" style="padding: 0">
+    <div class="layui-row kvf-fluid-padding15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">我的资料</div>
+                <div class="layui-card-body">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">用户头像</label>
+                            <div class="layui-input-inline" style="text-align: center">
+                                <img id="avatarImg" src="../pic/99.png" height="200" width="200">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">学号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="userNo" readonly  autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">不可修改。一般用于登入名</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="name"  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="password"  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                            </div>
+
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="edit">确认修改</button>
+                                <button class="layui-btn" lay-submit=""  id="back">返回</button>
 
 
+                            </div>
+                        </div>
 
-    <h1>lalalalaal</h1>
-    <h2>aaaaaa</h2>
 
-    <table class="layui-hide" id="demo" lay-filter="test"></table>
-
-    <div class="layui-btn-container">
-      <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
-      <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
-      <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </div>
+
 
 </body>
 </html>

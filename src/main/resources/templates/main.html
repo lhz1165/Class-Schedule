@@ -24,11 +24,11 @@
         var table=layui.table;
         $.ajax({
             type: "get",
-            url: "/getUser",
+            url: "/getUserInfo",
             success: function (result) {
                 if (result.code === "200") {
                     console.log(result.data);
-                    $("#username").html(result.data);
+                    $("#username").html(result.data.name);
                 } else if (result.code === "500") {
                     layer.msg(result.message, {icon: 2, time: 1000}, function () {
                         window.location.href = "index.html";
@@ -53,6 +53,21 @@
 
 <script>
 
+    layui.use(['jquery'], function(){
+        var $ = layui.$;
+        var id= window.location.search.toString();
+        console.log("id = " +id)
+        console.log("id len = " +id.length)
+        if (id !== null && id.length!==0 && id.length>3){
+            id = id.substring(4,id.length);
+            console.log("sonId"+id);
+            $("#iframeMain").attr("src","body/"+id+".html");
+        }
+
+
+
+    })
+
 </script>
 
 <div class="layui-layout layui-layout-admin">
@@ -61,17 +76,17 @@
         <!-- 头部区域（可配合layui 已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
 
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 1</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 2</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a href="">nav 3</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">nav groups</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">menu 11</a></dd>
-                    <dd><a href="">menu 22</a></dd>
-                    <dd><a href="">menu 33</a></dd>
-                </dl>
-            </li>
+<!--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 1</a></li>-->
+<!--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 2</a></li>-->
+<!--            <li class="layui-nav-item layui-hide-xs"><a href="">nav 3</a></li>-->
+<!--            <li class="layui-nav-item">-->
+<!--                <a href="javascript:;">nav groups</a>-->
+<!--                <dl class="layui-nav-child">-->
+<!--                    <dd><a href="">menu 11</a></dd>-->
+<!--                    <dd><a href="">menu 22</a></dd>-->
+<!--                    <dd><a href="">menu 33</a></dd>-->
+<!--                </dl>-->
+<!--            </li>-->
         </ul>
         <!-- 头像区域 -->
         <ul class="layui-nav layui-layout-right">
@@ -83,8 +98,8 @@
                 </a>
                 <!-- 下拉菜单 -->
                 <dl class="layui-nav-child">
-                    <dd><a href="">个人信息</a></dd>
-                    <dd><a href="">设置</a></dd>
+                    <dd><a class="m" href="body/b1.html">个人信息</a></dd>
+                    <dd><a href="">我的课表</a></dd>
                     <dd><a href="/index.html" id="logout">登出</a></dd>
                 </dl>
             </li>
@@ -102,24 +117,26 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">全部1</a>
+                    <a class="" href="javascript:;">个人中心</a>
                     <dl class="layui-nav-child">
 <!--                        <dd><a class="m" href="body/b1.html">菜单1</a></dd>-->
 <!--                        <dd><a class="m" href="body/b2.html">菜单2</a></dd>-->
-                        <dd><a class="m" href="body/b3.html">菜单3</a></dd>
+                        <dd><a class="m" href="body/b3.html">我的课程表</a></dd>
 <!--                        <dd><a  class="m" href="body/course.html">菜单4</a></dd>-->
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">全部2</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">list 1</a></dd>
-                        <dd><a href="javascript:;">list 2</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
+
+<!--                <li class="layui-nav-item">-->
+<!--                    <a href="javascript:;">全部2</a>-->
+<!--                    <dl class="layui-nav-child">-->
+<!--                        <dd><a href="javascript:;">list 1</a></dd>-->
+<!--                        <dd><a href="javascript:;">list 2</a></dd>-->
+<!--                        <dd><a href="">超链接</a></dd>-->
+<!--                    </dl>-->
+<!--                </li>-->
+
+<!--                <li class="layui-nav-item"><a href="javascript:;">click menu item</a></li>-->
+<!--                <li class="layui-nav-item"><a href="">the links</a></li>-->
             </ul>
         </div>
     </div>
@@ -173,14 +190,6 @@
 
     });
 </script>
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 </body>
 </html>

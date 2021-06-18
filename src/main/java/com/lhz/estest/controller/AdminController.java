@@ -81,6 +81,25 @@ public class AdminController {
     }
 
 
+    @ApiOperation("获取用户信息")
+    @GetMapping(path="/getUserInfo")
+    public Result getUserInfo(HttpServletRequest request) {
+        String studentNo = (String)request.getSession().getAttribute("studentNo");
+        return Result.success(studentService.lambdaQuery().eq(Student::getUserNo,studentNo).one());
+    }
+
+    @ApiOperation("修改用户信息")
+    @GetMapping(path="/edit")
+    public Result edit(String name,String password,HttpServletRequest request) {
+        String studentNo = (String)request.getSession().getAttribute("studentNo");
+        Student student = studentService.lambdaQuery().eq(Student::getUserNo, studentNo).one();
+        student.setName(name);
+        student.setPassword(password);
+        studentService.updateById(student);
+        return Result.success();
+    }
+
+
 
 
 }

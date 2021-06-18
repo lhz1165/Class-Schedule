@@ -28,7 +28,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
     @Override
     public String verifyStudent(String userNo, String password) {
-        Student student = lambdaQuery().ge(Student::getUserNo, userNo).one();
+        Student student = lambdaQuery().eq(Student::getUserNo, userNo).one();
         if (null == student) {
             return "false";
         }

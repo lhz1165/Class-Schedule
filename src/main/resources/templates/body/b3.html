@@ -6,7 +6,7 @@
 </head>
 <link rel="stylesheet" href="../static/lay/css/layui.css">
 <script src="../static/lay/layui.js"></script>
-<body background="background.png">
+<!--<body background="background.png">-->
 <script>
     layui.use(['jquery'], function () {
         let $ = layui.$;
@@ -105,6 +105,8 @@
 </script>
 
 
+
+
 <!--渲染课程表的方法-->
 <script>
     layui.use(['jquery'], function () {
@@ -115,13 +117,13 @@
             success: function (result) {
                 if (result.code === "200") {
                     let courseListMap = result.data;
-                    console.log(courseListMap);
+                    // console.log(courseListMap);
                     for(let key in courseListMap) {
                         //yi lie
                         let courseList = courseListMap[key];
                         //bianlie meiyi lie td
                         for (let i = 0; i < courseList.length; i++) {
-                            console.log(courseList[i])
+                            // console.log(courseList[i])
                             let myCourse = courseList[i];
                             let courseNo = myCourse.courseNo;//  从几行开始
                             let courseName = myCourse.courseName;
@@ -159,10 +161,31 @@
     // }
     // console.log(getRandomColor())
 
+</script>
 
 
+<script >
+<!--    layui监听select 判断-->
+    layui.use(['layer', 'jquery', 'form'], function () {
+        var layer = layui.layer,
+            $ = layui.jquery;
+        form = layui.form;
+
+        form.on('select(endTimeFilter)', function(data){
+            //开始时间晚于结束时间那么按钮禁用
+            if ($("#startTime").val()>=data.value){
+                layer.open({
+                    title: '警告'
+                    ,content: '开始时间不能晚于结束时间'
+                });
+
+            }
+
+        });
+    });
 
 </script>
+
 <table width="100%" align="center" style="border: 1px solid #aaa" id="course_table">
     <caption>
         <h2>我的课表</h2>
@@ -298,9 +321,9 @@
         </div>
     </div>
     <div class="layui-form-item" style="width:400px">
-        <label class="layui-form-label">选择框时间段</label>
+        <label class="layui-form-label">选择结束时间</label>
         <div class="layui-input-block">
-            <select id="endTime" lay-verify="required">
+            <select id="endTime" lay-verify="required" lay-filter="endTimeFilter">
                 <option value="">请选择时间的段</option>
                 <option value="2">8:45</option>
                 <option value="3">9:40</option>
