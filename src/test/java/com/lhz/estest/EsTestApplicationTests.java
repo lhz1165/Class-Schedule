@@ -16,11 +16,12 @@ class EsTestApplicationTests {
 
     @Test
     public void insert() {
-        com.lhz.estest.eneity.Student student = new com.lhz.estest.eneity.Student();
-        student.setPassword("123");
-        student.setName("admin");
-        student.setUserNo("15200143");
-        this.studentMapper.insert(student);
+        System.out.println("  __                   __                                \n" +
+                "_/  |_  ____   _______/  |_  ___________    ______ ______\n" +
+                "\\   __\\/ __ \\ /  ___/\\   __\\ \\____ \\__  \\  /  ___//  ___/\n" +
+                " |  | \\  ___/ \\___ \\  |  |   |  |_> > __ \\_\\___ \\ \\___ \\ \n" +
+                " |__|  \\___  >____  > |__|   |   __(____  /____  >____  >\n" +
+                "           \\/     \\/         |__|       \\/     \\/     \\/ ");
     }
 
 

@@ -130,10 +130,12 @@
                             let courseAddress = myCourse.courseAddress;
                             let courseColor = myCourse.courseColor;
                             if ("white"===courseName){
-                                console.log("white");
+                                // console.log("white");
                                 $("#t"+key).append('<td rowspan="1"></td>')
                             }else {
                                 console.log(courseName);
+                                console.log(key)
+                                console.log(courseColor)
                                 $("#t"+key).append('<td rowspan= "1" bgcolor='+courseColor+'>'+courseName+'<br/>'+'@'+courseAddress+'</td>')
                             }
                         }
@@ -146,11 +148,7 @@
             }
         });
     });
-    function a(color) {
-                 return(color += '5678956789defdef' [Math.floor(Math.random() * 16)]) &&
-                (color.length == 6) ? color : arguments.callee(color);
-    }
-    a('')
+
     // //qian色
     // var getRandomColor = function() {
     //     return '#' +
@@ -173,7 +171,9 @@
 
         form.on('select(endTimeFilter)', function(data){
             //开始时间晚于结束时间那么按钮禁用
-            if ($("#startTime").val()>=data.value){
+            console.log("s  "+$("#startTime").val())
+            console.log("e  "+data.value)
+            if (Number($("#startTime").val())>=Number(data.value)){
                 layer.open({
                     title: '警告'
                     ,content: '开始时间不能晚于结束时间'
@@ -235,7 +235,7 @@
         <td>4</td>
         <td rowspan="1">10:55-11:40</td>
     </tr>
-    <tr height="37px" align="center" id="t4">
+    <tr height="37px" align="center" id="t5">
         <td>5</td>
         <td rowspan="1">11:50-12:35</td>
 <!--        <td rowspan="3"></td>-->
