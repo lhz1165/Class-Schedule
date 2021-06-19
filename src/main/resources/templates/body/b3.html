@@ -35,15 +35,17 @@
                         success: function (result) {
                             if (result.data === "新增成功") {
                                 layer.msg("新增成功",{icon:1, time: 200},function(){
-                                    window.parent.location.reload();
+                                    top.location.href="/main.html?id=b3";
                                 })
                             } else if (result.data === "修改成功") {
                                 layer.msg("修改成功",{icon:1, time: 200},function(){
-                                    window.parent.location.reload();
+                                    //window.parent.location.reload();
+                                    top.location.href="/main.html?id=b3";
                                 })
                             }else {
                                 layer.msg("失败",{icon:1, time: 200},function(){
-                                    window.parent.location.reload();
+                                    //window.parent.location.reload();
+                                    top.location.href="/main.html?id=b3";
                                 })
                             }
                         }

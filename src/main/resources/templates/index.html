@@ -77,11 +77,16 @@
         success:function(result){
           if(result.code === "200"){
             layer.msg("登录成功",{icon:1, time: 50},function(){
+              // 判断用户是否选择记住密码（判断复选框是否被选中，如果选中，则设置cookie对象7天生效）
               if ($("#rememberMe").prop("checked")) {
                 // 选中，则设置cookie对象7天生效
                 // 将用户信息设置到cookie中
-                $.cookie("username",$("#username").val(), {expires:1});
-                $.cookie("rmbInfo", "true", { expires: 1 });
+                $.cookie("userIdStr",11111, {expires:7});
+
+              } else {
+                // 将用户信息设置到cookie中
+                $.cookie("userIdStr",22222);
+
               }
               window.location.href="/main.html";
             })
@@ -100,34 +105,35 @@
 <div class="main">
   <h1>登录页面</h1>
   <div class="form">
-    <form class="layui-form" action="">
-
-
-      <div class="layui-form-item">
-        <label class="layui-form-label">账号</label>
-        <div class="layui-input-inline">
-          <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入账号" class="layui-input">
+    <div class="layui-form login-form">
+      <form class="layui-form" action="" autocomplete="on">
+        <div class="layui-form-item">
+          <label class="layui-form-label">账号</label>
+          <div class="layui-input-inline">
+            <input type="text" name="username" lay-verify="title"  placeholder="请输入账号" class="layui-input">
+          </div>
         </div>
-      </div>
-      <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
-        <div class="layui-input-inline">
-          <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        <div class="layui-form-item">
+          <label class="layui-form-label">密码</label>
+          <div class="layui-input-inline">
+            <input type="password" name="password" lay-verify="pass" placeholder="请输入密码"  class="layui-input">
+          </div>
+          <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
         </div>
-        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
-      </div>
-      <div class="layui-form-item">
-        <label class="layui-form-label"> </label>
-        <input type="checkbox" name="rememberMe" id="rememberMe" value="true" lay-skin="primary" title="记住密码">
-      </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label"> </label>
+          <input type="checkbox" name="rememberMe" id="rememberMe" value="true"  checked ='checked' lay-skin="primary" title="记住我">
+        </div>
 
-      <div class="layui-form-item">
-        <div class="layui-input-block submit-btn">
-          <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-          <a href="/register.html"><button  type="button" class="layui-btn layui-btn-primary">注册账号</button></a>
+        <div class="layui-form-item">
+          <div class="layui-input-block submit-btn">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <a href="/register.html"><button  type="button" class="layui-btn layui-btn-primary">注册账号</button></a>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </div>
 </div>
 
